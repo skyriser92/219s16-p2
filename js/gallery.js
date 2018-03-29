@@ -90,5 +90,6 @@ function GalleryImage() {
 GalleryImage {
 	"location":"random",
 	"description":"blah",
-	""
+	"date":"April 23 1992",
+	"img": "img/wolf.jpg"
 }
