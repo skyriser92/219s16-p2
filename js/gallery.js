@@ -58,20 +58,27 @@ var mUrl = 'images.json';
 
 //XMLHttpRequest function
 mRequest.onreadystatechange = function() {
-// Do something interesting if file is opened successfully
+	// Do something interesting if file is opened successfully
 	if (mRequest.readyState == 4 && mRequest.status == 200) {
 		try {
-			// Let’s try and see if we can parse JSON
-			mJson = JSON.parse(mRequest.responseText);
-			// Let’s print out the JSON; It will likely show as "obj"
-			console.log(mJson);
+		// Let’s try and see if we can parse JSON (see next slide)
+		mJson = JSON.parse(mRequest.responseText);
+		// LOOP THROUGH the mJSON array here and fill up the
+		// mImages array with GalleryImage objects
+		// Let’s print out the JSON; It will likely show as “obj”
+			var imgCounter = 0;
+			while (imgCounter < mJson.images.length) {
+				mImages[imgCounter] = galleryImage(mJson.images[imgCounter].imgPath, mJson.images[imgCounter].imgLocation, mJson.images[imgCounter].description, mJson.images[imgCounter].date);
+			}
+		
+		console.log(mJson);
 		} 
 		catch(err) {
 			console.log(err.message)
 		}
 	}
 };
-mRequest.open("GET",mURL, true);
+mRequest.open('GET',mURL, true);
 mRequest.send();
 
 
@@ -97,12 +104,12 @@ window.addEventListener('load', function() {
 
 }, false);
 
-function GalleryImage(location, description, date, img) {
+function GalleryImage(var1, var2, var3, var4) {
 	//implement me as an object to hold the following data about an image:
-	this.location;
-	this.description;
-	this.date;
-	this.img;
+	this.img = var1;
+	this.location = var2;
+	this.description = var3;
+	this.date = var4;
 	//1. location where photo was taken
 	//2. description of photo
 	//3. the date when the photo was taken
